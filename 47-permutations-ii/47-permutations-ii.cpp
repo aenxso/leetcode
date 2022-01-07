@@ -22,7 +22,7 @@ private:
         
         // explore all possibilities 
         for(int i = begin; i < nums.size(); i++) {
-           if(i > begin && nums[begin] == nums[i]) continue; // skip duplicates
+           if(i > begin && nums[begin] == nums[i]) continue; // skip duplicates // i > begin bcuz it could be at 0 and begin at 2 - don't want to repeat checks
             swap(nums[begin], nums[i]);
             perm(nums, ans, begin + 1);
         }
