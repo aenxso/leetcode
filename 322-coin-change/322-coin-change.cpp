@@ -4,7 +4,7 @@ public:
         // create array to store min number of coins needed to make i cents
         // array length = amount + 1, because amount is the end goal. + 1 for accounting for 0
         
-        sort(coins.begin(), coins.end()); // optimization - break out of for loop if the coin is too big
+        sort(coins.begin(), coins.end()); // optimization - break out of for loop if the coin is too big - leetcode reports as slower tho
         vector<int> dp(amount + 1, (amount + 1)); // fill array with amount + 1 because we need a higher amount to compare 
                                                 // with in min function, and the value at dp[i] will not exceed amount
         dp[0] = 0;
