@@ -10,26 +10,18 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if(!list1) return list2;
-        if(!list2) return list1;
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        // recursive method
         
-        ListNode dummy = NULL; // create head for the new sorted list
-        ListNode *sorter = &dummy;
+        if(!l1) return l2;
+        if(!l2) return l1;
         
-        while(list1 && list2) {
-            if(list1->val < list2->val) {
-                sorter->next = list1;
-                list1 = list1->next;
-            } else {
-                sorter->next = list2;
-                list2 = list2->next;
-            }
-            sorter = sorter->next;
+        if(l1->val < l2->val) {
+            l1->next = mergeTwoLists(l1->next, l2);
+            return l1;
+        } else {
+            l2->next = mergeTwoLists(l1, l2->next);
+            return l2;
         }
-        
-        sorter->next = list1 ? list1 : list2; // if length of lists are not even, attach rest of longer list to new sorted list
-        
-        return dummy.next;  // return next of new head as this is where sorter pointer started off
     }
 };
