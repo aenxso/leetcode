@@ -5,6 +5,7 @@ public:
         // alt solution would be to traverse array backwards
         
         if(nums.size() == 1) return true;
+        
         int target = nums.size() - 1, totalJumpingPower = 0;
         
         for(int i = 0; i <= totalJumpingPower; i++) {
