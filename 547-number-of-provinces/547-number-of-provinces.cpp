@@ -1,10 +1,12 @@
 class Solution {
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n = isConnected.size(), ans = 0;
-        vector<bool> visited(n, false);
+        // adjacency matrix
+        // can use either bfs or dfs to solve
+        int ans = 0;
+        vector<bool> visited(isConnected.size(), false);
         
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < isConnected.size(); i++) {
             if(!visited[i]) {
                 dfs(isConnected, visited, i);
                 ans++;
@@ -14,11 +16,11 @@ public:
     }
     
 private:
-    void dfs(vector<vector<int>>& nums, vector<bool>& visited, int i) {
+    void dfs(vector<vector<int>>& grid, vector<bool>& visited, int i) {
         visited[i] = true;
-        for(int j = 0; j < visited.size(); j++) {
-            if(i != j && nums[i][j] == 1 && !visited[j]) {
-                dfs(nums, visited, j);
+        for(int j = 0; j < grid.size(); j++) {
+            if(i != j && !visited[j] && grid[i][j] == 1) {
+                dfs(grid, visited, j);
             }
         }
     }
