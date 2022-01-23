@@ -6,7 +6,11 @@ public:
     }
     
     bool addCar(int carType) {
-        return stalls[carType - 1]-- > 0;
+        if(stalls[carType - 1]) {
+            stalls[carType - 1] -= 1;
+            return true;
+        }
+        return false;
     }
 };
 
