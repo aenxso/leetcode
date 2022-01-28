@@ -7,11 +7,11 @@ public:
     WordDictionary() {}
     
     void addWord(string word) {
-        dict[word.size()].push_back(word);
+        dict[word.size()].push_back(word); // add word to dictionary based on string length
     }
     
     bool search(string word) {
-        for(auto s : dict[word.size()]) {
+        for(auto s : dict[word.size()]) { // if not using auto would be: for(string &&s : dict[word.size()])
             if(match(s, word)) {
                 return true;
             }
@@ -24,7 +24,7 @@ private:
     
     bool match(string a, string b) {
         for(int i = 0; i < a.size(); i++) {
-            if(b[i] == '.') {
+            if(b[i] == '.') { // ignore index if wildcard
                 continue;
             }
             if(a[i] != b[i]) {
