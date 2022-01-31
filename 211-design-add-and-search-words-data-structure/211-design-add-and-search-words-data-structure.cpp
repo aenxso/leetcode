@@ -1,20 +1,14 @@
 class WordDictionary {
-    
 public:
-    // create an hashmap which takes an int (size of word) and string (word itself)
-    // when searching for a word, use size of word only search that section of the dictionary
-    
     WordDictionary() {}
     
     void addWord(string word) {
-        dict[word.size()].push_back(word); // add word to dictionary based on string length
+        dict[word.size()].push_back(word);
     }
     
     bool search(string word) {
-        for(auto s : dict[word.size()]) { // if not using auto would be: for(string &&s : dict[word.size()])
-            if(match(s, word)) {
-                return true;
-            }
+        for(auto s : dict[word.size()]) {
+            if(match(word, s)) return true;
         }
         return false;
     }
@@ -23,13 +17,9 @@ private:
     unordered_map<int, vector<string>> dict;
     
     bool match(string a, string b) {
-        for(int i = 0; i < a.size(); i++) {
-            if(b[i] == '.') { // ignore index if wildcard
-                continue;
-            }
-            if(a[i] != b[i]) {
-                return false;
-            }
+        for(int i = 0; i < a.length(); i++) {
+            if(a[i] == '.') continue;
+            if(a[i] != b[i]) return false;
         }
         return true;
     }
