@@ -1,31 +1,23 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int count = 0, num = nums[0];
-        for(int i = 0; i < nums.size() - 1; i++) {
-            
+        int count = 0, num = nums[0]; // count keeps track of how many times we've seen num
+        
+        for(int i = 0; i < nums.size() - 1; i++) {     
             if(num == nums[i + 1]) {
                 count++;
-                
                 if(count >= 2) {
-                    int j = i;
+                    int j = i; // create separate variable for while loop, otherwise main loop itrs get messed up
                     while(num == nums[j] && j < nums.size()) {
-                        cout<<"j: "<<j<<endl;
                         nums.erase(nums.begin() + j);
                         j++;
                     }
-                    // cout<<count<<endl;
-                    // cout<<"i: "<<i<<endl;
-                    // nums.erase(nums.begin() + i);
-                    // cout<<"Deleted\n";
                     i--;
-                    cout<<"size: "<<nums.size()<<endl;
                 }
             } else {
-                count = 0;
+                count = 0; // reset count if num is different
                 num = nums[i + 1];
             }
-            cout<<"i: "<<i<<", count: "<<count<<", num: "<<num<<endl;
         }
         return nums.size();
     }
