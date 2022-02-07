@@ -8,18 +8,13 @@ public:
         
         for(int i = 0; i < s.size(); i++) {
             sFreq[s[i] - 'a']++;
-            // cout<<sFreq[i]<<endl;
         }
-        cout<<sFreq.size()<<endl;
         for(int i = 0; i < t.size(); i++) {
             tFreq[t[i] - 'a']++;
-            // cout<<tFreq[i]<<endl;
         }
         for(int i = 0; i < tFreq.size(); i++){
-            cout<<sFreq[i]<<" vs. "<<tFreq[i]<<endl;
             if(sFreq[i] != tFreq[i]) {
-                cout<<"found"<<endl;
-                ans = alphabet[i % 26];
+                ans = alphabet[i % 26]; // mod by 26 because string.length may be > 26
                 break;
             }
         }
