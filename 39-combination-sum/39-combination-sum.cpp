@@ -11,9 +11,9 @@ public:
     
 private:
     void backtrack(vector<int>& nums, vector<vector<int>>& ans, vector<int>& combo, int target, int begin, int sum) {
-        // subtract current value from target each time so we know how much more we need to add to reach the target
-        // when target reaches a perfect 0, we know we have a combination
-        // if target becomes less than 0, no solution with current combination - return
+        // keep track of accumulating sum
+        // when it reaches target perfectly, we have a valid combination
+        // if it goes over target, there is no combination - return
         
         if(sum > target) return;
         if(sum == target) {
