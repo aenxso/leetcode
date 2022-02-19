@@ -17,8 +17,6 @@ public:
             mn = min(mn, nums[i]);
         }
         
-        minDev = mx - mn; 
-        
         for(int i = 0; i < n; i++) {
             pq.push(nums[i]);
         }
