@@ -4,7 +4,6 @@ public:
         // multiply all odd numbers by 2 to make them even
         // find the max/min out of all numbers as this is used to find the min deviation
         // create priority queue (max heap) to store all values
-        // 
         
         int minDev = INT_MAX, n = nums.size(), mx = INT_MIN, mn = INT_MAX;
         priority_queue<int> pq;
@@ -13,14 +12,15 @@ public:
             if((nums[i] % 2) != 0) {
                 nums[i] *= 2;
             }
-            mx = max(mx, nums[i]);
             mn = min(mn, nums[i]);
-        }
-        
-        for(int i = 0; i < n; i++) {
             pq.push(nums[i]);
         }
         
+        // add 
+        // for(int i = 0; i < n; i++) {
+        //     pq.push(nums[i]);
+        // }
+        mx = pq.top();
         while((pq.top() % 2) == 0) {
             int top = pq.top();
             pq.pop();
