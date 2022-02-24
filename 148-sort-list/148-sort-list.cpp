@@ -11,6 +11,9 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
+        // divide list into two parts, then recursively merge the two lists
+        // space: O(logn) due to stack (recursion)
+        
         if(!head || !head->next) return head;
         ListNode* slow = head;
         ListNode* fast = head->next;
