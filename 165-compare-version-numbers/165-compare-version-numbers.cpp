@@ -1,6 +1,10 @@
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
+        // traverse through both strings at the same time and compare their numerical values at each index
+        // if one is found to be greater, return appropriate answer
+        // if nothing is found by end of loop, reset num1 and num2 to compare next index value
+        
         int num1 = 0, num2 = 0, i = 0, j = 0, n1 = version1.size(), n2 = version2.size();
         
         while(i < n1 || j < n2) {
