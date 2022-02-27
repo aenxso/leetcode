@@ -12,8 +12,13 @@
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
+        // use heap indexing
+        // left child is always parent * 2. Right child is always parent * 2 + 1, 
+        //   regardless of whether these nodes exist or not.
+        // at each node, check distance between leftmost and rightmost node and compare to current maxWidth
+        
         if(!root) return 0;
-        unsigned long long int maxWidth = 0;
+        unsigned long long int maxWidth = 0; // use ulli to avoid overflow
         queue<pair<TreeNode*, int>> q;
         q.push(pair<TreeNode*, int>(root, 1));
         while(!q.empty()) {
