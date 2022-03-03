@@ -1,6 +1,10 @@
 class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& nums) {
+        // solution using a dp array
+        // time and space are O(n)
+        // can be optimized to get rid of array and just use an int value
+        
         if(nums.size() < 3) return 0;
         int ans = 0;
         vector<int> dp(nums.size());
