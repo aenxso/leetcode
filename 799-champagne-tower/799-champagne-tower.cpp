@@ -8,7 +8,7 @@ public:
         vector<vector<double>> dp(101, vector<double>(101, 0.0));
         dp[0][0] = poured; // setting the top glass with the value of how many 'pours' are left
         
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i <= query_row; i++) {
             for(int j = 0; j <= i; j++) {
                 if(dp[i][j] > 1) {  // if the glass is full and has more pours left then set values for the next glasses
                     dp[i + 1][j] += (dp[i][j] - 1) / 2.0;
