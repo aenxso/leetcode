@@ -3,10 +3,8 @@ public:
     int countOrders(int n) {
         long mod = 1e9 + 7, ans = 1;
         
-        for(int i = 2; i <= n; i++) {
-            int spaces = (i - 1) * 2 + 1;
-            ans *= spaces * (spaces + 1) / 2;
-            ans %= mod;
+        for(int i = 1; i <= n; i++) {
+            ans = ans * (i * 2 - 1) * i % mod;
         }
         return (int)ans;
     }
