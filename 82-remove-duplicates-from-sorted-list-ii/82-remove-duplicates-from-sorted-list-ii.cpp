@@ -18,23 +18,18 @@ public:
         
         while(cur) {
             ListNode *checker = cur->next;
-            cout<<"one"<<endl;
             if(checker && checker->val == cur->val) {
-                cout<<"if"<<endl;
-                // auto value = checker->val;
-                while(checker && checker->val == cur->val) {
-                    cout<<"del "<<checker->val<<endl;
+                auto value = checker->val;
+                while(checker && checker->val == value) {
                     ListNode *del = checker;
                     checker = checker->next;
                     delete del;
                 }
                 cur = checker;
                 prev->next = cur;
-                // checker = checker->next;
             } else {
                 prev = cur;
                 cur = checker;
-                // checker = checker->next;
             }
         }
         return dummy.next;
