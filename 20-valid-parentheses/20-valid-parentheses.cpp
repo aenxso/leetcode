@@ -5,7 +5,7 @@ public:
         // if a closing bracket is found, check if the top of the stack is a match
         // if no return false, if yes then pop the stack and continue
         
-        if(s.length() < 2) return false;
+        if(s.size() < 2) return false;
         stack<char> stk;
         
         for(char c : s) {
@@ -19,26 +19,26 @@ public:
                 case '{':
                     stk.push(c);
                     break;
-                case ')':  
-                    if(stk.empty() || stk.top() != '(') { // make sure stk.empty check is first
-                        return false;
-                    } else {
+                case ')':
+                    if(!stk.empty() && stk.top() == '(') {
                         stk.pop();
                         break;
+                    } else {
+                        return false;
                     }
                 case ']':
-                    if(stk.empty() || stk.top() != '[') {
-                        return false;
-                    } else {
+                    if(!stk.empty() && stk.top() == '[') {
                         stk.pop();
                         break;
+                    } else {
+                        return false;
                     }
                 case '}':
-                    if(stk.empty() || stk.top() != '{') {
-                        return false;
-                    } else {
+                    if(!stk.empty() && stk.top() == '{') {
                         stk.pop();
                         break;
+                    } else {
+                        return false;
                     }
                 default: ;
             }
