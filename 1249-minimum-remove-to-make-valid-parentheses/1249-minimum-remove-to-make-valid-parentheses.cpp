@@ -1,6 +1,13 @@
 class Solution {
 public:
     string minRemoveToMakeValid(string s) {
+        // use two counters, one for open brackets and one for closing brackets
+        // itereate through string and count all closing brackets
+        // iterate through string again and match open brackets with remaining number of closing brackets available
+        // if there is a match, append the brackets to answer string
+        // if not, do not append and just adjust open/close counters
+        // if a letter is encountered, add it to the answer string
+        
         int open = 0, close = 0;
         string ans;
         
@@ -27,40 +34,5 @@ public:
             }
         }
         return ans;
-        
-//         for(int i = 0; i < s.size(); i++) {
-//             if(s[i] == '(') {
-//                 // cout<<"open"<<endl;
-//                 open++;
-//             } else if(s[i] == ')') {
-//                 // cout<<"close"<<endl;
-//                 close++;
-//                 if(open < close) {
-//                     cout<<"open: "<<open<<", close: "<<close<<endl;
-//                     s.erase(s.begin() + i);
-//                     // cout<<"deleted"<<endl;
-//                     close--;
-//                     i--;
-//                 }
-//             } else { // if character is a letter
-//                 continue;
-//             }
-//         }
-        
-//         if(open != close) {
-//             cout<<"not equal"<<endl;
-//             int diff = open - close;
-//             for(int i = 0; i < s.size(); i++) {
-//                 if(diff > 0 && s[i] == '(') {
-//                     cout<<"deleted uneven"<<endl;
-//                     s.erase(s.begin() + i);
-//                     diff--;
-//                     if(s.size() > 0) i--;
-//                 } else {
-//                     continue;
-//                 }
-//             }    
-//         }
-//         return s;
     }
 };
