@@ -25,10 +25,8 @@ public:
             second = second->next;
         }
         
-        int firstVal = first->val, secondVal = second->val;
-        
-        int tmp = firstVal;
-        first->val = secondVal;
+        int tmp = first->val;
+        first->val = second->val;
         second->val = tmp;
         return head;
     }
