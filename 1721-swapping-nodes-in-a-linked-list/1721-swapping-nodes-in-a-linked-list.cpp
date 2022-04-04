@@ -15,6 +15,7 @@ public:
         // move the first pointer up k spaces, and a tracker pointer - both start from head
         // move tracker up until the end and move second pointer along with it - second is k nodes away from tracker
         //   and when tracker reaches the end of the list, second will be k spaces from the end
+        // swap the values once pointers are in place
         
         ListNode *first = head, *second = head, *tracker = head;
      
@@ -29,9 +30,7 @@ public:
             second = second->next;
         }
         
-        int tmp = first->val;
-        first->val = second->val;
-        second->val = tmp;
+        swap(first->val, second->val);
         return head;
     }
     
