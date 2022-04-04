@@ -11,13 +11,17 @@
 class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k) {
-        ListNode *first = head, *second = head, *tracker = head;
+        // create two pointers to track each position
+        // move the first pointer up k spaces, and a tracker pointer - both start from head
+        // move tracker up until the end and move second pointer along with it - second is k nodes away from tracker
+        //   and when tracker reaches the end of the list, second will be k spaces from the end
         
-        int kCopy = k;
-        while(kCopy > 1 && first) {
+        ListNode *first = head, *second = head, *tracker = head;
+     
+        while(k > 1 && first) {
             first = first->next;
             tracker = tracker->next;
-            kCopy--;
+            k--;
         }
         
         while(tracker->next) {
@@ -25,10 +29,8 @@ public:
             second = second->next;
         }
         
-        int firstVal = first->val, secondVal = second->val;
-        
-        int tmp = firstVal;
-        first->val = secondVal;
+        int tmp = first->val;
+        first->val = second->val;
         second->val = tmp;
         return head;
     }
