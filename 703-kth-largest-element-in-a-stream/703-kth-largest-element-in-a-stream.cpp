@@ -1,6 +1,11 @@
 class KthLargest {
 public:
     KthLargest(int k, vector<int>& nums) {
+        // use a minheap and keep it at the size of k
+        // this way the top will always be the kth largest, because we pop off the preceding values and can access
+        // the kth largest element by using .top()
+        // if we used a max heap, the maximums would be getting popped off and we need to keep those
+        
         index = k;
         for(int i : nums) {
             q.push(i);
