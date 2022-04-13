@@ -7,21 +7,26 @@ public:
         int num = 1;
         
         while(rowStart <= rowEnd && colStart <= colEnd) {
+            
+            // first row forward
             for(int i = colStart; i <= colEnd; i++) {
                 ans[rowStart][i] = num++;
             }
             rowStart++;
             
+            // last column downward
             for(int i = rowStart; i <= rowEnd; i++) {
                 ans[i][rowEnd] = num++;
             }
             colEnd--;
             
+            // last row backwards
             for(int i = colEnd; i >= colStart; i--) {
                 ans[rowEnd][i] = num++;
             }
             rowEnd--;
             
+            // first column upwards
             for(int i = rowEnd; i >= rowStart; i--) {
                 ans[i][colStart] = num++;
             }
