@@ -12,16 +12,14 @@
 class Solution {
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
-        if(!root) return root;
-        TreeNode *node = new TreeNode();
+        if(!root) return NULL;
         
-        if(val < root->val) {
-            node = searchBST(root->left, val);
-        } else if(val > root->val) {
-            node = searchBST(root->right, val);
-        } else {
-            node = root;
+        if(val == root->val) {
+            return root;
+        } else if(val < root->val) {
+            return searchBST(root->left, val);
+        } else { // if this is else-if, compiler will complain about no return statement
+            return searchBST(root->right, val);
         }
-        return node;
     }
 };
