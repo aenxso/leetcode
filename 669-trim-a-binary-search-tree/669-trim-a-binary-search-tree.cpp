@@ -12,6 +12,11 @@
 class Solution {
 public:
     TreeNode* trimBST(TreeNode* root, int low, int high) {
+        // if the root->val is lower than the low range, then return the right node because all nodes to the right are higher
+        // if the root->val is higher than the high range, then return the left node because all nodes to the left are lower
+        // then recurse on node->left and node->right to reach all the nodes
+        
+        // base case
         if(!root) return NULL;
         
         if(root->val < low) {
