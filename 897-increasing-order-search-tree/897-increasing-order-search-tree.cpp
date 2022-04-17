@@ -12,6 +12,8 @@
 class Solution {
 public:
     TreeNode* increasingBST(TreeNode* root) {
+        // go all the way to the left then append the nodes to a new tree, always going to the right
+        
         if(!root) return NULL;
         
         increasingBST(root->left);
@@ -23,6 +25,7 @@ public:
     }
 
 private:
-    TreeNode* node = new TreeNode(0);
+    // declare these outside recursion otherwise new ones will be made everytime and nothing will join together
+    TreeNode* node = new TreeNode(0); 
     TreeNode* newRoot = node;
 };
