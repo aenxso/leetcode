@@ -1,9 +1,14 @@
 class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
+        // use minimum spanning tree and Prim's algorithm
+        // for every node, add its frontier to the min heap (all nodes not yet connected)
+        // every itr, pop the smallest value from the heap and add node to visited
+        // add the manhattan distance when adding node
+        
         int n = points.size(), ans = 0, i = 0, connected = 0;
-        vector<bool> visited(n);
-        priority_queue<pair<int, int>> pq;
+        vector<bool> visited(n);           // keep track of visited nodes
+        priority_queue<pair<int, int>> pq; // min heap
         
         while(++connected < n) {
             visited[i] = true;
