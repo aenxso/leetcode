@@ -1,6 +1,8 @@
 class Solution {
 public:
     int minimumEffortPath(vector<vector<int>>& heights) {
+        // using Dijkstra's algorithm
+        
         using pipii = pair<int, pair<int, int>>;
         priority_queue<pipii, vector<pipii>, greater<pipii>> pq;
         
