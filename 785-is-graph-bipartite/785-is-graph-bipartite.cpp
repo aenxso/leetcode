@@ -1,6 +1,11 @@
 class Solution {
 public:
     bool isBipartite(vector<vector<int>>& graph) {
+        // use BFS
+        // store visited nodes in a queue and visited array, pop queue as each node is explored
+        // once visited, mark the visited node to avoid cycles
+        // time: O(|V| + |E|) - every edge is visited twice, 2|E| just turns into |E|
+        
         int n = graph.size();
         queue<int> q;
         vector<int> visited(n);
