@@ -3,10 +3,20 @@ public:
     int findUnsortedSubarray(vector<int>& nums) {
         int n = nums.size(), i = 0, j = n - 1, ans = 0;
         
-        while(i + 1 < n && nums[i] <= nums[i + 1]) i++;
-        while(j - 1 >= 0 && nums[j] >= nums[j - 1]) j--;
+        for(; i < n - 1; i++) {
+            if(nums[i + 1] < nums[i]) {
+                break;
+            }
+        }
+        
+        for(; j > 0; j--) {
+            if(nums[j - 1] > nums[j]) {
+                break;
+            }
+        }
         
         if(i == n - 1) return 0; // array is already sorted
+       
         
         // if there are duplicate numbers in the unsorted subarray, we need to include them
         
@@ -16,8 +26,8 @@ public:
             maxVal = max(maxVal, nums[m]);
         }
         
-        while(i - 1 >= 0 && nums[i - 1] > minVal) i--;
-        while(j + 1 <= n - 1 && nums[j + 1] < maxVal) j++;
+        while(i > 0 && nums[i - 1] > minVal) i--;
+        while(j < n - 1 && nums[j + 1] < maxVal) j++;
         
         ans = j - i + 1;
         return ans;
