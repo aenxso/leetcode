@@ -1,30 +1,37 @@
 class Solution {
 public:
-    int longestIncreasingPath(vector<vector<int>>& matrix) { // comparison submission for time
-        int rows = matrix.size();
-        if (!rows) return 0;
-        int cols = matrix[0].size();
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        // use DFS and memoization and recursion
+        // note: removing the memoization vector results in a brute force solution - time limit exceeded
         
-        vector<vector<int>> dp(rows, vector<int>(cols, 0));
-        std::function<int(int, int)> dfs = [&] (int x, int y) {
-            if (dp[x][y]) return dp[x][y];
-            vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
-            for (auto &dir : dirs) {
-                int xx = x + dir[0], yy = y + dir[1];
-                if (xx < 0 || xx >= rows || yy < 0 || yy >= cols) continue;
-                if (matrix[xx][yy] <= matrix[x][y]) continue;
-                dp[x][y] = std::max(dp[x][y], dfs(xx, yy));
-            }
-            return ++dp[x][y];
-        };
+        int n = matrix.size(), m = matrix[0].size(), longest = 0;
+        if(n == 0 || m == 0) return 0;
+        vector<vector<int>> cache(n, vector<int>(m)); // memoization - stores length of longest path starting at each coordinate
         
-        int ret = 0;
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                ret = std::max(ret, dfs(i, j));
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                int curPath = dfs(matrix, cache, n, m, i, j);
+                longest = max(longest, curPath);
             }
         }
+        return longest;
+    }
+    
+private:
+    int dfs(vector<vector<int>>& matrix, vector<vector<int>>& cache, int n, int m, int i, int j) {
+        if(cache[i][j] > 0) return cache[i][j]; // coordinate has already been explored
+                                                //   removing this line results in brute force
+        vector<vector<int>> dirs{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int maxPath = 0;
         
-        return ret;
+        for(auto dir : dirs) {
+            int x = dir[0] + i, y = dir[1] + j;
+            if(x >= 0 && x < n && y >= 0 && y < m && matrix[x][y] > matrix[i][j]) { // in bounds and strictly increasing
+                int curPath = dfs(matrix, cache, n, m, x, y);
+                maxPath = max(maxPath, curPath); // out of all 4 directions, get the max stored path length (comes from cache vector)
+            }
+        }
+        cache[i][j] = maxPath + 1; // add one because it is a path itself at every coordinate
+        return cache[i][j];        // return the length of longest path at that coordinate
     }
 };
