@@ -2,6 +2,7 @@ class Solution {
 public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         // use DFS and memoization and recursion
+        // note: removing the memoization vector results in a brute force solution - time limit exceeded
         
         int n = matrix.size(), m = matrix[0].size(), longest = 0;
         if(n == 0 || m == 0) return 0;
@@ -19,7 +20,7 @@ public:
 private:
     int dfs(vector<vector<int>>& matrix, vector<vector<int>>& cache, int n, int m, int i, int j) {
         if(cache[i][j] > 0) return cache[i][j]; // coordinate has already been explored
-        
+                                                //   removing this line results in brute force
         vector<vector<int>> dirs{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         int maxPath = 0;
         
