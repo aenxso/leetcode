@@ -1,6 +1,14 @@
 class Solution {
 public:
     int maxEnvelopes(vector<vector<int>>& envelopes) {
+        // Sort the array to turn it from a 2D array problem to a 1D array problem (becomes longest increasing subsequence)
+        // sort by width increasing, and if 2 widths are the same, sort by height decreasing
+        //  reason for this is, we want to avoid duplicates and if both are increasing, it will
+        //  be considered an increasing subsequence, but ultimately will give the wrong answer because
+        //  it has duplicates. Encountering an equal width paired with a smaller height will break that
+        //  hence we make a custom comparator function
+        // use binary search to avoid TLE
+        
         int maxFits = 0;
         sort(envelopes.begin(), envelopes.end(), cmp);
         vector<int> dp(envelopes.size(), 0);
