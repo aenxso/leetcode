@@ -18,14 +18,14 @@ public:
         
         
         long long ans = 0;
-        int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : +1;
+        int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : +1; // get sign for final answer
         
-        long long dd = abs(dividend), dv = abs(divisor);
+        long long dd = abs(dividend), dv = abs(divisor);       // get absolute values
         
         for(int i = 31; i >= 0; i--) {
             if((dv << i) > dd) continue;
-            ans |= (1LL << i);
-            dd -= (dv << i);
+            ans |= (1LL << i); // LL makes the integer literal of type long long. |= is OR operator
+            dd -= (dv << i);   // reduce dividend by (divisor * 2^i)
         }
         
         ans *= sign;
