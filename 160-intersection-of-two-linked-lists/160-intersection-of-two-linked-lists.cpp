@@ -9,35 +9,35 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        int lenA = Length(headA), lenB = Length(headB);
+        // use a length function to get the length of each list
+        // get the difference of the lengths and increment the longer list by the difference 
+        //  then increment both lists till they reach the end and while they are not the same
+        
+        int lenA = getLength(headA), lenB = getLength(headB);
         int diff = abs(lenA - lenB);
-        AdvanceByK(diff, lenA > lenB ? &headA : &headB);
+        advanceByDiff(diff, lenA > lenB ? &headA : &headB);
         
-//         if(lenA < lenB) swap(headA, headB);
-        
-//         while(diff--) {
-//             headA = headA->next;
-//         }
-        
-        while (headA && headB && (headA != headB)) {
+        while(headA && headB && (headA != headB)) {
             headA = headA->next;
             headB = headB->next;
         }
-        return headA; //nullptr implies no overlap
+        return headA; // if null is returned there is no overlap
     }
     
-    int Length(ListNode* list) {
+private:
+    int getLength(ListNode* head) {
         int len = 0;
-        while (list) {
-            ++len;
-            list = list->next;
+        while(head) {
+            len++;
+            head = head->next;
         }
         return len;
     }
     
-    void AdvanceByK(int k, ListNode** list) {
-        while(k--) {
-            *list = (*list)->next;
+    void advanceByDiff(int diff, ListNode** head) {
+        while(diff) {
+            diff--;
+            *head = (*head)->next;
         }
     }
 };
