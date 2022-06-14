@@ -1,18 +1,23 @@
 class Solution {
-   public:
+public:
     int maximumUniqueSubarray(vector<int>& nums) {
+        // sliding window method
+        // create a set to store numbers that have been seen so far
+        // as we encounter a repeating number, remove it from the set and increment
+        //  the left pointer (make window smaller)
+        
         unordered_set<int> seen;
-        int curr_sum = 0, max_sum = 0, l = 0;
-        for (int num : nums) {
-            while (seen.find(num) != seen.end()) {
-                curr_sum -= nums[l];
+        int maxSum = 0, curSum = 0, l = 0;
+        for(int num : nums) {
+            while(seen.find(num) != seen.end()) {
+                curSum -= nums[l];
                 seen.erase(nums[l]);
-                l += 1;
+                l++;
             }
-            curr_sum += num;
+            curSum += num;
             seen.insert(num);
-            max_sum = max(max_sum, curr_sum);
+            maxSum = max(maxSum, curSum);
         }
-        return max_sum;
+        return maxSum;
     }
 };
