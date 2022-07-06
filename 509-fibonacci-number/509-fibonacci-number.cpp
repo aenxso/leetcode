@@ -1,10 +1,13 @@
 class Solution {
 public:
+    int memo[31] = {0};
     int fib(int n) {
-        // recursion
-        if(n <= 1) { // base condition
+        if(n <= 1) {
             return n;
         }
-        return fib(n - 1) + fib(n - 2);
+        if(memo[n]) {
+            return memo[n];
+        }
+        return memo[n] = fib(n - 1) + fib(n - 2);
     }
 };
