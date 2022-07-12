@@ -11,20 +11,45 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        if(!head) return NULL;
-        vector<int> nums;
-        ListNode *tmp = head;
-        while(tmp) {
-            nums.push_back(tmp->val);
-            tmp = tmp->next;
+        // recursively divide list into two parts and sort, then merge together
+        
+        if(!head || !head->next) return head;
+        ListNode *fast = head->next, *slow = head;
+        
+        while(fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        sort(nums.begin(), nums.end());
-        tmp = head;
-        int i = 0;
-        while(tmp) {
-            tmp->val = nums[i++];
-            tmp = tmp->next;
+        
+        // divide the list in 2
+        fast = slow->next;
+        slow->next = NULL;
+        
+        return merge(sortList(head), sortList(fast));
+    }
+    
+private:
+    ListNode* merge(ListNode* l1, ListNode* l2) {
+        ListNode tmp(0);
+        ListNode *cur = &tmp;
+        
+        while(l1 && l2) {
+            if(l1->val < l2->val) {
+                cur->next = l1;
+                l1 = l1->next;
+            } else {
+                cur->next = l2;
+                l2 = l2->next;
+            }
+            cur = cur->next;
         }
-        return head;
+        
+        if(l1) {
+            cur->next = l1; 
+        } else if(l2) {
+            cur->next = l2;
+        }
+        
+        return tmp.next;
     }
 };
