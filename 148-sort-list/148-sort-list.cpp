@@ -12,6 +12,7 @@ class Solution {
 public:
     ListNode* sortList(ListNode* head) {
         // recursively divide list into two parts and sort, then merge together
+        // space: O(logn) due to stack (recursion)
         
         if(!head || !head->next) return head;
         ListNode *fast = head->next, *slow = head;
@@ -22,8 +23,8 @@ public:
         }
         
         // divide the list in 2
-        fast = slow->next;
-        slow->next = NULL;
+        fast = slow->next; // set fast back to the element in the middle
+        slow->next = NULL; // sever link connecting slow list to fast list
         
         return merge(sortList(head), sortList(fast));
     }
