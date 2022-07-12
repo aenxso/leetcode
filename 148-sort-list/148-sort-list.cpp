@@ -11,46 +11,20 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        // divide list into two parts, then recursively merge the two lists
-        // space: O(logn) due to stack (recursion)
-        
-        if(!head || !head->next) return head;
-        ListNode* slow = head;
-        ListNode* fast = head->next;
-        
-        while(fast && fast->next) {
-            slow = slow->next;
-            fast = fast->next->next;
+        if(!head) return NULL;
+        vector<int> nums;
+        ListNode *tmp = head;
+        while(tmp) {
+            nums.push_back(tmp->val);
+            tmp = tmp->next;
         }
-         // divide list into two parts
-        fast = slow->next;
-        slow->next = NULL;
-        
-        return merge(sortList(head), sortList(fast));
-    }
-    
-private:
-    ListNode* merge(ListNode* l1, ListNode* l2) {
-        ListNode tmp(0);
-        ListNode* cur = &tmp;
-        
-        while(l1 && l2) {
-            if(l1->val < l2->val) {
-                cur->next = l1;
-                l1 = l1->next;
-            } else {
-                cur->next = l2;
-                l2 = l2->next;
-            }
-            cur = cur->next;
+        sort(nums.begin(), nums.end());
+        tmp = head;
+        int i = 0;
+        while(tmp) {
+            tmp->val = nums[i++];
+            tmp = tmp->next;
         }
-        
-        if(l1) {
-            cur->next = l1;
-        } else {
-            cur->next = l2;
-        }
-        
-        return tmp.next;
+        return head;
     }
 };
