@@ -6,17 +6,16 @@ public:
         int count = 0;
         map<string, bool> mp;
         
-        for(auto x: words) {
-            if(mp.find(x) != mp.end()) { // if the string has already occurred then don't compute again
-                if(mp[x] == true) { // if that string has value true that means it is subsequence, count++
+        for(auto word : words) {
+            if(mp.find(word) != mp.end()) { // if string has already occurred then don't compute again
+                if(mp[word] == true) {      // if string has value true it is subsequence - count++
                     count++;
                 }
-                continue; //if not, go for next string
+                continue; //if not go for next string
             }
-            mp[x] = isSubsequence(s, x, s.size(), x.size()); // if not calculated previously, compute the value 
-                                                             // and assign to x(current string from words)
-            if(mp[x]) count++;
-            // count += (mp[x] == true);
+            mp[word] = isSubsequence(s, word, s.size(), word.size()); // if not calculated previously, compute the value 
+                                                                      // and assign to wword (current string from words)
+            if(mp[word]) count++;
         }
         return count;
     }
