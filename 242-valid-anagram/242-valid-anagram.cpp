@@ -1,12 +1,22 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        if(s.size() != t.size()) return false;
-        sort(s.begin(), s.end());
-        sort(t.begin(), t.end());
-        for(int i = 0; i < s.size(); i++) {
-            if(s[i] != t[i]) return false;
+        vector<char> sFreq(26);
+        vector<char> tFreq(26);
+        
+        countLetters(sFreq, s);
+        countLetters(tFreq, t);
+        
+        for(int i = 0; i < sFreq.size(); i++) {
+            if(sFreq[i] != tFreq[i]) return false;
         }
+        
         return true;
+    }
+    
+    void countLetters(vector<char> &v, string &s) {
+        for(int i = 0; i < s.length(); i++) {
+            v[s[i] - 'a']++;
+        }
     }
 };
