@@ -9,32 +9,27 @@ public:
            one skipping the last house. Return the max between these two functions.
         */
         
-        int n = nums.size();
-        if(n == 0) return 0;
-        if(n == 1) return nums[0];
-        
-        vector<int> nums1(nums.begin() + 1, nums.end()); // create vector skipping first house
-        vector<int> nums2(nums.begin(), nums.end() - 1); // create vector skipping last house
-        
-        return max(robOriginal(nums1), robOriginal(nums2));
-    }
-    
-private:
-    int robOriginal(vector<int>& nums) {
-        
-        // base cases
         if(nums.size() == 0) return 0;
         if(nums.size() == 1) return nums[0];
         
-        vector<int> values(nums.size()); // create vector to store max amount at each house
-        values[0] = nums[0];
-        values[1] = max(nums[0], nums[1]);
+        vector<int> nums1(nums.begin(), nums.end() - 1); // vector skipping last house
+        vector<int> nums2(nums.begin() + 1, nums.end()); // vector skipping first house
+        
+        return max(robberOriginal(nums1), robberOriginal(nums2));
+    }
+    
+private:
+     int robberOriginal(vector<int>& nums) {
+        if(nums.size() == 0) return 0;
+        if(nums.size() == 1) return nums[0];
+        
+        vector<int> dp(nums.size()) ;
+        dp[0] = nums[0];
+        dp[1] = max(nums[0], nums[1]);
         
         for(int i = 2; i < nums.size(); i++) {
-            values[i] = max(nums[i] + values[i - 2], values[i - 1]); // either rob current house + everything from second 
-                                                                     // last house OR skip the
-                                                                     // house if it's not worth
+            dp[i] = max((nums[i] + dp[i - 2]), dp[i - 1]);
         }
-        return values[nums.size() - 1]; // last value stores the max amount of money to rob
+        return dp[nums.size() - 1];
     }
 };
