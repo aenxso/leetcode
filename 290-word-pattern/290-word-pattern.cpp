@@ -12,11 +12,12 @@ public:
         string word;
         
         for(string word; ss >> word; i++) {
-            if(i == n || pat[pattern[i] - 'a'] != map[word]) {
+            if(i == n || pat[pattern[i] - 'a'] != map[word]) { // if end is reached before all words in s are traversed
+                                                               //   OR value of keys to words don't match
                 return false;
             }
-            pat[pattern[i] - 'a'] = i + 1; // 1-based indexing since map assigns 0 to keys not found (cr. @lllllll2)
-            map[word] = i + 1;
+            pat[pattern[i] - 'a'] = i + 1; // otherwise map both to value i + 1
+            map[word] = i + 1;             // 1-based indexing since map assigns 0 to keys not found (cr. @lllllll2)
         }
         
         return i == n;
