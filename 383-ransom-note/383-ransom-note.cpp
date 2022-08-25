@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        unordered_map<char, int> mp;
+        unordered_map<char, int> mp; // create map to store letter frequency of magazine
         
         for(auto letter : magazine) {
             mp[letter]++;
