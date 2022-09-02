@@ -12,20 +12,23 @@
 class Solution {
 public:
     vector<double> averageOfLevels(TreeNode* root) {
+        // use a queue to store nodes in level order
+        // add all node values together and divide by size of level (aka size of the queue for that level)
+        
         vector<double> res;
         queue<TreeNode*> q;
         q.push(root);
         while(!q.empty()) {
-            long temp = 0;
+            long tmp = 0;
             int n = q.size();
             for(int i = 0; i < n; i++) {
                 TreeNode* t = q.front();
                 q.pop();
                 if(t->left) q.push(t->left);
                 if(t->right) q.push(t->right);
-                temp += t->val;
+                tmp += t->val;
             }
-            res.push_back((double)temp / n);
+            res.push_back((double)tmp / n);
         }
         return res;
     }
