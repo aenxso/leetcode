@@ -12,6 +12,8 @@
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
+        // use multiset to handle duplicates in input
+        
         map<int, map<int, multiset<int>>> map;
         vector<vector<int>> ans;
         queue<pair<TreeNode*, pair<int, int>>> q;
