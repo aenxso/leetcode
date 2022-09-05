@@ -27,7 +27,8 @@ public:
         vector<vector<int>> ans;
         while(!q.empty()) {
             vector<int> level; // create vector for current level to push to final ans
-            for(int i = q.size(); i >= 1; i--) {
+            int n = q.size();
+            for(int i = n; i >= 1; i--) {
                 Node* curr = q.front(); 
                 q.pop();
                 level.push_back(curr->val);
