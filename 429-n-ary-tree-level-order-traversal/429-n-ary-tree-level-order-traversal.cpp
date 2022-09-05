@@ -21,12 +21,12 @@ public:
 class Solution {
 public:
     vector<vector<int>> levelOrder(Node* root) {
-        if(root == nullptr) return {};
+        if(!root) return {};
         queue<Node*> q;
         q.push(root);
         vector<vector<int>> ans;
         while(!q.empty()) {
-            vector<int> level;
+            vector<int> level; // create vector for current level to push to final ans
             for(int i = q.size(); i >= 1; i--) {
                 Node* curr = q.front(); 
                 q.pop();
