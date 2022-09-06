@@ -13,11 +13,11 @@ class Solution {
 public:
     TreeNode* pruneTree(TreeNode* root) {
         if(!root) return NULL;
-        root->left = pruneTree(root->left);
-        root->right = pruneTree(root->right);
-        if(root->val == 0 && !root->left && !root->right) {
-            root = NULL;
+        root->left = pruneTree(root->left); // prune left side of tree
+        root->right = pruneTree(root->right); // prune right side of tree
+        if(root->val == 1 || root->left || root->right) { // if root contains one OR it has children, return root
+            return root;
         }
-        return root;
+        return NULL; // return NULL otherwise
     }
 };
