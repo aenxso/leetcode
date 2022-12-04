@@ -1,21 +1,36 @@
 class Solution {
 public:
     int minimumAverageDifference(vector<int>& nums) {
-        long i = 0, j = 0, m = LONG_MAX, k, d;
-        long pfx = 0, sfx = accumulate(nums.begin(), nums.end(), 0L);
+        long totalsum = 0, currentsum = 0;
+        int n = nums.size();
         
-        for(int n : nums) {
-            pfx += n;
-            sfx -= n;
-            j += 1;
-            k = nums.size() - j;
-            d = abs(pfx / j - sfx / (k ? k : 1));
-            if(d < m) {
-                m = d;
-                i = j - 1;
+        for(auto i : nums) {
+            totalsum += i;
+        }
+        
+        int mini = INT_MAX, ans = 0;
+        
+        // calculate avg1 till ith index and avg2 till n-1-ith index
+        // then get the abs diff between avg1 and avg2 and keep tracking the index giving min diff
+        // return the index giving min diff
+        for(int i = 0; i < n; i++) {
+            currentsum += nums[i];
+            int avg1 = currentsum / (i + 1);
+            if(i == n - 1) {
+                if(avg1<mini) {
+                    return n - 1;
+                } else {
+                    break;
+                }
+            }
+            int avg2 = (totalsum - currentsum) / (n - i - 1);
+            
+            if(abs(avg1 - avg2) < mini) {
+                mini = abs(avg1 - avg2);
+                ans = i;
             }
         }
         
-        return i;
+        return ans;
     }
 };
